@@ -45,7 +45,25 @@
     </header>
 
     <main class="max-w-6xl mx-auto p-6">
-      <div id="job-container"></div>
+      <div class="flex gap-4 mb-8">
+        <button onclick="changeTab('all')" class="btn btn-sm btn-outline">
+          All Jobs
+        </button>
+        <button
+          onclick="changeTab('interview')"
+          class="btn btn-sm btn-outline btn-success"
+        >
+          Interview
+        </button>
+        <button
+          onclick="changeTab('rejected')"
+          class="btn btn-sm btn-outline btn-error"
+        >
+          Rejected
+        </button>
+      </div>
+
+      <div id="job-container" class="grid grid-cols-1 gap-4"></div>
     </main>
 
     <script src="script.js"></script>

@@ -1,3 +1,5 @@
+let currentTab = "all"; // To track which tab is selected
+
 let jobs = [
   {
     id: 1,
@@ -81,16 +83,33 @@ let jobs = [
   },
 ];
 
+// Main function to render job cards on screen
 function displayJobs() {
   const container = document.getElementById("job-container");
   container.innerHTML = "";
 
-  jobs.forEach(function (job) {
-    const div = document.createElement("div");
-    div.className =
-      "bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-4 flex flex-col md:flex-row justify-between items-center";
+  // Filtering jobs based on current tab selection
+  const filteredJobs = jobs.filter(function (job) {
+    if (currentTab === "all") return true;
+    return job.status === currentTab;
+  });
 
-    div.innerHTML = `
+  // Check if there are no jobs in current category
+  if (filteredJobs.length === 0) {
+    container.innerHTML = `
+      <div class="text-center py-20 bg-white rounded-2xl border border-dashed border-gray-300 w-full col-span-full">
+        <h2 class="text-2xl font-bold text-gray-400">No Jobs Available</h2>
+        <p class="text-gray-400">Please switch categories or update job status.</p>
+      </div>
+    `;
+  } else {
+    // Generate card for each job
+    filteredJobs.forEach(function (job) {
+      const div = document.createElement("div");
+      div.className =
+        "bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-4 flex flex-col md:flex-row justify-between items-center";
+
+      div.innerHTML = `
             <div>
                 <h3 class="text-xl font-bold">${job.role}</h3>
                 <p class="text-gray-500">${job.name} - ${job.city}</p>
@@ -101,38 +120,37 @@ function displayJobs() {
             </div>
             <div class="flex gap-3 mt-4 md:mt-0">
                 <button onclick="updateJobStatus(${job.id}, 'interview')" class="btn btn-sm ${job.status === "interview" ? "btn-success text-white" : "btn-outline btn-success"}">Interview</button>
-
                 <button onclick="updateJobStatus(${job.id}, 'rejected')" class="btn btn-sm ${job.status === "rejected" ? "btn-error text-white" : "btn-outline btn-error"}">Rejected</button>
-
                 <button onclick="removeJob(${job.id})" class="btn btn-sm btn-ghost text-red-500 font-bold">Delete</button>
             </div>
         `;
-    container.appendChild(div);
-  });
+      container.appendChild(div);
+    });
+  }
 
+  // Update the total job count display
   document.getElementById("total-jobs-count").innerText = jobs.length;
 }
 
+// Initial call to display data
 displayJobs();
 
-// Function for Interview and Rejected button clicks
+// Function to handle status updates for interview/rejected
 function updateJobStatus(id, newStatus) {
   for (let i = 0; i < jobs.length; i++) {
     if (jobs[i].id === id) {
-      // Logic for switching status
       if (jobs[i].status === newStatus) {
-        jobs[i].status = "all";
+        jobs[i].status = "all"; // Toggle back to default
       } else {
-        jobs[i].status = newStatus;
+        jobs[i].status = newStatus; // Set to new status
       }
     }
   }
-  // Call functions to show changes on screen
   displayJobs();
   refreshDashboard();
 }
 
-// Function to calculate and show numbers in dashboard
+// Function to update the dashboard count numbers
 function refreshDashboard() {
   let countI = 0;
   let countR = 0;
@@ -149,7 +167,7 @@ function refreshDashboard() {
   document.getElementById("rejected-jobs-count").innerText = countR;
 }
 
-// Function to remove job from list
+// Function to remove a specific job from list
 function removeJob(id) {
   let remainingJobs = [];
   for (let i = 0; i < jobs.length; i++) {
@@ -160,7 +178,10 @@ function removeJob(id) {
   jobs = remainingJobs;
   displayJobs();
   refreshDashboard();
+}
 
-  // Also update total count
-  document.getElementById("total-jobs-count").innerText = jobs.length;
+// Function for tab navigation
+function changeTab(tabName) {
+  currentTab = tabName;
+  displayJobs();
 }
