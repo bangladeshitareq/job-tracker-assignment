@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Application Tracker</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <header class="max-w-6xl mx-auto p-6">
+      <h1 class="text-3xl font-bold mb-8">Job Dashboard</h1>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+          <p class="text-gray-500 font-medium">Total Available Jobs</p>
+          <h2 id="total-jobs-count" class="text-4xl font-bold mt-2">0</h2>
+        </div>
+        <div
+          class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-b-4 border-b-green-500"
+        >
+          <p class="text-gray-500 font-medium">Interview List</p>
+          <h2
+            id="interview-jobs-count"
+            class="text-4xl font-bold mt-2 text-green-600"
+          >
+            0
+          </h2>
+        </div>
+        <div
+          class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-b-4 border-b-red-500"
+        >
+          <p class="text-gray-500 font-medium">Rejected List</p>
+          <h2
+            id="rejected-jobs-count"
+            class="text-4xl font-bold mt-2 text-red-600"
+          >
+            0
+          </h2>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto p-6">
+      <div id="job-container"></div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
