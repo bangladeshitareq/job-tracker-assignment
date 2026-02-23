@@ -100,8 +100,11 @@ function displayJobs() {
                 </div>
             </div>
             <div class="flex gap-3 mt-4 md:mt-0">
-                <button class="btn btn-sm btn-success text-white px-4">Interview</button>
-                <button class="btn btn-sm btn-error text-white px-4">Rejected</button>
+                <button onclick="updateJobStatus(${job.id}, 'interview')" class="btn btn-sm ${job.status === "interview" ? "btn-success text-white" : "btn-outline btn-success"}">Interview</button>
+
+                <button onclick="updateJobStatus(${job.id}, 'rejected')" class="btn btn-sm ${job.status === "rejected" ? "btn-error text-white" : "btn-outline btn-error"}">Rejected</button>
+
+                <button onclick="removeJob(${job.id})" class="btn btn-sm btn-ghost text-red-500 font-bold">Delete</button>
             </div>
         `;
     container.appendChild(div);
@@ -111,3 +114,53 @@ function displayJobs() {
 }
 
 displayJobs();
+
+// Function for Interview and Rejected button clicks
+function updateJobStatus(id, newStatus) {
+  for (let i = 0; i < jobs.length; i++) {
+    if (jobs[i].id === id) {
+      // Logic for switching status
+      if (jobs[i].status === newStatus) {
+        jobs[i].status = "all";
+      } else {
+        jobs[i].status = newStatus;
+      }
+    }
+  }
+  // Call functions to show changes on screen
+  displayJobs();
+  refreshDashboard();
+}
+
+// Function to calculate and show numbers in dashboard
+function refreshDashboard() {
+  let countI = 0;
+  let countR = 0;
+
+  for (let i = 0; i < jobs.length; i++) {
+    if (jobs[i].status === "interview") {
+      countI++;
+    } else if (jobs[i].status === "rejected") {
+      countR++;
+    }
+  }
+
+  document.getElementById("interview-jobs-count").innerText = countI;
+  document.getElementById("rejected-jobs-count").innerText = countR;
+}
+
+// Function to remove job from list
+function removeJob(id) {
+  let remainingJobs = [];
+  for (let i = 0; i < jobs.length; i++) {
+    if (jobs[i].id !== id) {
+      remainingJobs.push(jobs[i]);
+    }
+  }
+  jobs = remainingJobs;
+  displayJobs();
+  refreshDashboard();
+
+  // Also update total count
+  document.getElementById("total-jobs-count").innerText = jobs.length;
+}
