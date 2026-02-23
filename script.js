@@ -106,8 +106,9 @@ function displayJobs() {
     // Generate card for each job
     filteredJobs.forEach(function (job) {
       const div = document.createElement("div");
+
       div.className =
-        "bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-4 flex flex-col md:flex-row justify-between items-center";
+        "bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-4 flex flex-col md:flex-row justify-between items-center hover:shadow-md transition-shadow cursor-pointer";
 
       div.innerHTML = `
             <div>
