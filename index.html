@@ -45,6 +45,11 @@
     </header>
 
     <main class="max-w-6xl mx-auto p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold">Available Jobs</h2>
+        <p id="filter-info" class="text-gray-500 font-semibold text-sm"></p>
+      </div>
+
       <div class="flex gap-4 mb-8">
         <button
           onclick="changeTab('all')"
@@ -68,6 +73,7 @@
 
       <div id="job-container" class="grid grid-cols-1 gap-4"></div>
     </main>
+
     <footer
       class="max-w-6xl mx-auto p-6 text-center border-t border-gray-200 mt-10"
     >

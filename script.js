@@ -1,5 +1,6 @@
 let currentTab = "all"; // To track which tab is selected
 
+// Job data with salary range updates
 let jobs = [
   {
     id: 1,
@@ -7,8 +8,7 @@ let jobs = [
     role: "Frontend Developer",
     city: "Dhaka",
     type: "Full-Time",
-    pay: "40k",
-    info: "Work with React and Tailwind CSS.",
+    pay: "$40,000 - $60,000",
     status: "all",
   },
   {
@@ -17,8 +17,7 @@ let jobs = [
     role: "UI/UX Designer",
     city: "Remote",
     type: "Part-Time",
-    pay: "35k",
-    info: "Design interfaces using Figma.",
+    pay: "$30,000 - $45,000",
     status: "all",
   },
   {
@@ -27,8 +26,7 @@ let jobs = [
     role: "Backend Developer",
     city: "Sylhet",
     type: "Full-Time",
-    pay: "50k",
-    info: "Manage databases and APIs.",
+    pay: "$50,000 - $75,000",
     status: "all",
   },
   {
@@ -37,8 +35,7 @@ let jobs = [
     role: "Digital Marketer",
     city: "Dhaka",
     type: "Contract",
-    pay: "30k",
-    info: "Handle social media campaigns.",
+    pay: "$25,000 - $35,000",
     status: "all",
   },
   {
@@ -46,9 +43,8 @@ let jobs = [
     name: "InnoSoft",
     role: "Full Stack Developer",
     city: "Remote",
-    pay: "65k",
     type: "Full-Time",
-    info: "Build complete web applications.",
+    pay: "$60,000 - $90,000",
     status: "all",
   },
   {
@@ -56,9 +52,8 @@ let jobs = [
     name: "App Pro",
     role: "App Developer",
     city: "Dhaka",
-    pay: "45k",
     type: "Full-Time",
-    info: "Develop mobile apps using Flutter.",
+    pay: "$45,000 - $65,000",
     status: "all",
   },
   {
@@ -66,9 +61,8 @@ let jobs = [
     name: "Web Masters",
     role: "QA Engineer",
     city: "Rajshahi",
-    pay: "38k",
     type: "On-Site",
-    info: "Test web applications for bugs.",
+    pay: "$35,000 - $50,000",
     status: "all",
   },
   {
@@ -76,9 +70,8 @@ let jobs = [
     name: "Data Mine",
     role: "Data Analyst",
     city: "Dhaka",
-    pay: "55k",
     type: "Remote",
-    info: "Analyze data and create reports.",
+    pay: "$55,000 - $80,000",
     status: "all",
   },
 ];
@@ -93,6 +86,12 @@ function displayJobs() {
     if (currentTab === "all") return true;
     return job.status === currentTab;
   });
+
+  // Updating the filter counter (e.g., 1 of 8 jobs)
+  const filterInfo = document.getElementById("filter-info");
+  if (filterInfo) {
+    filterInfo.innerText = filteredJobs.length + " of " + jobs.length + " jobs";
+  }
 
   // Check if there are no jobs in current category
   if (filteredJobs.length === 0) {
@@ -186,3 +185,6 @@ function changeTab(tabName) {
   currentTab = tabName;
   displayJobs();
 }
+
+// Make sure counts are right on first load
+refreshDashboard();
