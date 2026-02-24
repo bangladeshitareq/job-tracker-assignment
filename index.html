@@ -3,43 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Job Application Tracker</title>
+    <title>Job Application Tracker - Final</title>
     <link
       href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css"
       rel="stylesheet"
       type="text/css"
     />
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .active-tab {
+        background-color: #4f46e5 !important;
+        color: white !important;
+        border: none !important;
+      }
+      .job-card {
+        transition: all 0.3s ease;
+        border-radius: 1.5rem;
+      }
+    </style>
   </head>
-  <body class="bg-gray-50 min-h-screen">
+  <body class="bg-[#111827] text-white min-h-screen">
     <header class="max-w-6xl mx-auto p-6">
-      <h1 class="text-3xl font-bold mb-8">Job Dashboard</h1>
+      <h1 class="text-3xl font-extrabold mb-8">Job Dashboard</h1>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-          <p class="text-gray-500 font-medium">Total Available Jobs</p>
+        <div class="bg-[#1f2937] p-6 rounded-2xl border border-gray-700">
+          <p class="text-gray-400">Total Available Jobs</p>
           <h2 id="total-jobs-count" class="text-4xl font-bold mt-2">0</h2>
         </div>
-        <div
-          class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-b-4 border-b-green-500"
-        >
-          <p class="text-gray-500 font-medium">Interview List</p>
-          <h2
-            id="interview-jobs-count"
-            class="text-4xl font-bold mt-2 text-green-600"
-          >
-            0
-          </h2>
+        <div class="bg-[#1f2937] p-6 rounded-2xl border-b-4 border-green-500">
+          <p class="text-green-500">Interview List</p>
+          <h2 id="interview-jobs-count" class="text-4xl font-bold mt-2">0</h2>
         </div>
-        <div
-          class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-b-4 border-b-red-500"
-        >
-          <p class="text-gray-500 font-medium">Rejected List</p>
-          <h2
-            id="rejected-jobs-count"
-            class="text-4xl font-bold mt-2 text-red-600"
-          >
-            0
-          </h2>
+        <div class="bg-[#1f2937] p-6 rounded-2xl border-b-4 border-red-500">
+          <p class="text-red-500">Rejected List</p>
+          <h2 id="rejected-jobs-count" class="text-4xl font-bold mt-2">0</h2>
         </div>
       </div>
     </header>
@@ -47,40 +44,43 @@
     <main class="max-w-6xl mx-auto p-6">
       <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-bold">Available Jobs</h2>
-        <p id="filter-info" class="text-gray-500 font-semibold text-sm"></p>
+        <p id="filter-info" class="text-gray-400 font-bold text-sm"></p>
       </div>
 
       <div class="flex gap-4 mb-8">
         <button
+          id="btn-all"
           onclick="changeTab('all')"
-          class="btn btn-sm btn-outline hover:btn-primary transition-all"
+          class="btn btn-sm btn-outline text-white active-tab"
         >
-          All Jobs
+          All
         </button>
         <button
+          id="btn-interview"
           onclick="changeTab('interview')"
-          class="btn btn-sm btn-outline btn-success hover:text-white transition-all"
+          class="btn btn-sm btn-outline text-white"
         >
           Interview
         </button>
         <button
+          id="btn-rejected"
           onclick="changeTab('rejected')"
-          class="btn btn-sm btn-outline btn-error hover:text-white transition-all"
+          class="btn btn-sm btn-outline text-white"
         >
           Rejected
         </button>
       </div>
 
-      <div id="job-container" class="grid grid-cols-1 gap-4"></div>
+      <div
+        id="job-container"
+        class="grid grid-cols-1 gap-6 min-h-[400px]"
+      ></div>
     </main>
 
     <footer
-      class="max-w-6xl mx-auto p-6 text-center border-t border-gray-200 mt-10"
+      class="max-w-6xl mx-auto p-10 text-center border-t border-gray-800 mt-10"
     >
-      <p class="text-gray-500 font-medium">
-        Developed with ❤️ by Md.Tareq Rahman
-      </p>
-      <p class="text-xs text-gray-400 mt-1">© 2026 Job Tracker Assignment</p>
+      <p class="text-gray-500">Developed with ❤️ by Md.Tareq Rahman</p>
     </footer>
 
     <script src="script.js"></script>
